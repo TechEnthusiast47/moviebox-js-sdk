@@ -38,6 +38,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "dev": "tsx watch src/index.ts",
+    "start": "node examples/express/server.js",
+    "start:ts": "tsx examples/express/server.ts",
     "prepublishOnly": "npm run clean && npm run build && npm run lint && npm test"
   },
   "keywords": [
@@ -52,6 +54,11 @@
     "node": ">=18"
   },
   "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "pino": "^9.4.0",
+    "undici": "^6.19.8"
+  },
   "devDependencies": {
     "@types/node": "^24.10.1",
     "@typescript-eslint/eslint-plugin": "^8.46.4",
@@ -66,9 +73,5 @@
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "vitest": "^4.0.8"
-  },
-  "dependencies": {
-    "pino": "^9.4.0",
-    "undici": "^6.19.8"
   }
 }
