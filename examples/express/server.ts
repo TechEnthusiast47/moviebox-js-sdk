@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express from 'express';
 
 import {
   MovieboxSession,
@@ -15,7 +15,7 @@ const session = new MovieboxSession({
 
 const router = express.Router();
 
-router.get('/search', async (req: Request, res: Response, next: NextFunction) => {
+router.get('/search', async (req, res, next) => {
   try {
     const query = String(req.query.q ?? '').trim();
     if (!query) {
@@ -67,11 +67,12 @@ const app = express();
 app.use(express.json());
 app.use('/api/moviebox', router);
 
-app.use((error: unknown, _req: Request, res: Response, _next: NextFunction) => {
+app.use((error, _req, res, _next) => {
   const message = error instanceof Error ? error.message : 'Unknown error';
   res.status(500).json({ error: message });
 });
 
-app.listen(4000, () => {
-  console.log('Moviebox Express sample listening on port 4000');
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`🚀 Moviebox API listening on port ${PORT}`);
 });
